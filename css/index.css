@@ -1,0 +1,124 @@
+/*最上面的*/
+.topbg{
+	width: 100%;
+	min-height: 400px;
+	max-height: 960px;
+	max-width:640px;
+	min-width: 300px;
+}
+.topbg img{
+	width: 100%;
+}
+/*content*/
+/*heart text*/
+.heart{
+	width: 100%;
+}
+.hearttext {
+	width: 100%;
+	margin-top: 50px;
+}
+.hearttext img{
+	width: 100%;
+}
+.top_border{
+	text-align: right;
+	margin: 20px 0px 5px 0px;
+}
+.top_border .line_right{
+	width: 13%;
+}
+.bottom_border{
+	text-align: left;
+	margin: 20px 0px 20px 0px;
+}
+.bottom_border .line_left{
+	width: 23%;
+}
+/*今天，你表白了吗？*/
+.bottom_border .line_left2{
+	width: 55%;
+}
+/*数字*/
+.number{}
+.text{
+	
+}
+.text_1{
+	display: inline-block;
+}
+.text_2{
+	display: inline-block;
+	color: pink;
+}
+.text_3{
+	display: inline-block;
+}
+.text_4{
+	display: block;
+}
+/*button*/
+.button_block{
+	display: block;
+	width: 90%;
+	margin: 0 auto;
+	font-size: 20px;
+	height: 40px;
+	margin-bottom: 8px;
+}
+.button1{
+	background: #DB5D5E;
+}
+.button2{
+	background: #A87EA6;
+	margin-bottom: 45px;
+}
+.button_inline{
+	display: inline-block;
+	width: 50%;
+	height: 55px;
+	font-size: 25px;
+}
+.button3{
+	background: #DB5D5E;
+	float: left;
+}
+.button4{
+	background: #A87EA6;
+	float: right;
+}
+/*表白显示表格*/
+.mes_ul{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+.mes_li{
+	height: 150px;
+	border-bottom: #A87EA6 2px solid;
+	width: 100%;
+	position: relative;
+}
+.mes_li3{
+	border-bottom: #BE9EBC 2px solid;
+}
+.mes_li4{
+	border-bottom: none;
+}
+.mes_li4 a{
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin-top: 25px;
+	font-size: 25px;
+	text-decoration: none;
+	color: #A87EA6;
+}
+.tri{
+	border-width: 20px 0px 0px 0px;
+	border-style: solid;
+	border-color: red;
+	background: #000;
+	width: 0px;
+	height: 0px;
+}
