@@ -23,6 +23,10 @@ img{
 	max-width:640px;
 	min-width: 300px;
 }
+.biaobai{
+	max-width:576px;
+	min-width: 270px;
+}
 .line{
 	display: inline-block;
 	height: 8px;

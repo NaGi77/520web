@@ -10,7 +10,13 @@
 </head>
 <body>
     <header>
-        <div class="topbg"><img src="image/topbg.gif"></div>
+        <div class="topbg"><img src="image/topbg.gif">
+            <div class="top_bg"></div>
+            <span class="top_text top_520">520</span>
+            <span class="top_text top_love1">爱就说出来</span>
+            <span class="top_text top_love2">敢爱敢表白</span>
+            <span class="top_text top_love3"><img src="image/text1.gif">一封情书<br>，一束玫瑰<img src="image/text2.gif"></span>
+        </div>
     </header>
     <div class="content">
         <div class="heart">
@@ -19,41 +25,75 @@
             <div class="bottom_border"><span class="line line_left"></span><span class="line line_dot"></span></div>
         </div>
         <div class="today">
-            <div><span>今天，</span><span>你表白了吗？</span></div>
+            <div class="today_text"><span class="today_text1">今天，</span><span class="today_text2">你表白了么？</span></div>
             <div class="bottom_border"><span class="line line_left2"></span><span class="line line_dot2"></span></div>
         </div>
         <div class="number">
             <div class="number1">
-                <span class="line line_dot2"></span><span class="text text_1">已有</span>
-                <div class="text"><span class="text_2">203</span><span class="text_3">人</span><span class="text_4">参与告白</span></div>
+                <div class="text">
+                    <span class="line line_dot2"></span><span class="text_1">已有</span>
+                    <span class="text_2 text_red">203</span><span class="text_3">人</span><span class="text_4">参与告白</span>
+                </div>
+            </div>
+             <div class="number1">                
+                <div class="text">
+                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_purple">279</span><span class="text_3">封</span><span class="text_4">情书</span>
+                </div>
+            </div>
+             <div class="number1">               
+                <div class="text">
+                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_red">89</span><span class="text_3">个</span><span class="text_4">楼栋参与告白</span>
+                </div>
             </div>
              <div class="number1">
-                <span class="line line_dot2"></span><span class="text text_1">已有</span>
-                <div class="text"><span class="text_2">279</span><span class="text_3">封</span><span class="text_4">情书</span></div>
-            </div>
-             <div class="number1">
-                <span class="line line_dot2"></span><span class="text text_1">已有</span>
-                <div class="text"><span class="text_2">89</span><span class="text_3">个</span><span class="text_4">楼栋参与告白</span></div>
-            </div>
-             <div class="number1">
-                <span class="line line_dot2"></span><span class="text text_1">已有</span>
-                <div class="text"><span class="text_2">289</span><span class="text_3">个</span><span class="text_4">寝室参与告白</span></div>
+                <div class="text">
+                    <span class="line line_dot2"></span><span class="text_1">已有</span>
+                    <span class="text_2 text_purple">289</span><span class="text_3">个</span><span class="text_4">寝室参与告白</span>
+                </div>
             </div>
         </div>
         <div class="message">
             <form>
-                <input type="button" class="button button1 button_block" value="我要表白">
-                <input type="button" class="button button2 button_block" value="查询表白">
+                <!-- 这里我要表白的界面 -->
+                <input type="button" class="button button1 button_block" value="我要表白" onclick="">
+                <input type="button" class="button button2 button_block" value="查询表白" onclick="showdiv()">
+                <script type="text/javascript">
+                        function showdiv(){
+                            var div1=document.getElementById('biaobai');
+                            div1.style.display="block";
+                        }
+                        function hiddendiv(){
+                            var div1=document.getElementById('biaobai');
+                            div1.style.display="none";
+                        }
+                </script>
+                <div class="biaobai" id="biaobai">
+                    <span>请输入手机号</span>
+                    <input type="text">
+                    <input type="button" value="查询" onclick="hiddendiv()">
+                </div>
                 <input type="button" class="button button3 button_inline" value="最新表白">
                 <input type="button" class="button button4 button_inline" value="最热表白">
                 <div class="clear"></div>
                 <ul type="none" class="mes_ul">
-                    <li class="mes_li mes_li1">1<div class="tri"></div></li>
-                    <li class="mes_li mes_li2">2</li>
-                    <li class="mes_li mes_li3">3</li>
-                    <li class="mes_li mes_li4"><a href="">查看更多</a></li>
+                    <li class="mes_li mes_li1">
+                        <div class="tri"></div><span class="tri_number">1444</span>
+                        <span class="mes_text">你说你不相信天长地久<br>我想我也不能为你证明<br>于我，在爱上你的那刻，时间就已经停止了</span>
+                        <!-- 这里的桃心点赞还有问题 -->
+                        <a class="agree"><img src="image/heart.gif"><span>200</span></a>
+                    </li>
+                    <li class="mes_li mes_li2">
+                        <div class="tri"></div><span class="tri_number">2</span>
+                         <span class="mes_text">（表白二）</span>
+                        <a class="agree"><img src="image/heart1.gif"><span>200</span></a>
+                    </li>
+                    <li class="mes_li mes_li3">
+                        <div class="tri"></div><span class="tri_number">1</span>
+                         <span class="mes_text">（表白三）</span>
+                        <a class="agree"><img src="image/heart1.gif"><span>200</span></a>
+                    </li>
+                    <li class="mes_li mes_li4"><input type="button" value="查看更多"></li>
                 </ul>
-
             </form>
         </div>
     </div>
