@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>520</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=0,maximum-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <link rel="stylesheet" type="text/css" href="css/public.css">
+    <link rel="stylesheet" type="text/css" href="css/love.css">
+</head>
+<body>
+	<div class="content">
+		<form>
+			<ul type="none" class="love_ul">
+				<li class="li1"><div class="from">From</div><div class="nick nick1"><input type="text" placeholder="你的昵称" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';"></div><div class="clear"></div></li>
+				<li class="li2"><div class="to">To</div>
+					<div class="nick nick2">
+					<input type="text" placeholder="对方昵称" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';">
+					<input type="text" placeholder="对方手机号" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';">
+					<select id="dormitory" name="dormitory" onchange="this.style.color='#000';">
+						<option value="">宿舍区</option>
+						<option value="韵苑" onselect="this.style.color='#000';">韵苑</option>
+						<option value="紫崧">紫崧</option>
+						<option value="沁园">沁园</option>
+					</select>
+					<div class="tri"><img src="image/tri.gif"></div>
+					<input type="text" placeholder="楼栋" class="ld_number" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';"><p>栋</p>
+					<input type="text" placeholder="寝室号" class="qs_number" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';"><p>号</p>
+					<div class="clear"></div>
+				</div></li>
+				<li class="li3">
+					<textarea name="comment" rows="10" class="input textarea" onfocus="this.value=''; this.onfocus=null; document.getElementById('none_div').style.display='none'; this.style.color='#000';">开始写情书</textarea>
+					<div class="text_area" id="none_div">请输入不超过<p class="t_45">45</p>字</div>
+				</li>
+			</ul>
+			<input type="submit" value="提交" class="submit">
+		</form>
+	</div>
+</body>
+</html>

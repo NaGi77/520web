@@ -55,7 +55,7 @@
         <div class="message">
             <form>
                 <!-- 这里我要表白的界面 -->
-                <input type="button" class="button button1 button_block" value="我要表白" onclick="">
+                <input type="button" class="button button1 button_block" value="我要表白" onclick="newpage()">
                 <input type="button" class="button button2 button_block" value="查询表白" onclick="showdiv()">
                 <script type="text/javascript">
                         function showdiv(){
@@ -65,6 +65,9 @@
                         function hiddendiv(){
                             var div1=document.getElementById('biaobai');
                             div1.style.display="none";
+                        }
+                        function newpage(){
+                            window.open('love.html');
                         }
                 </script>
                 <div class="biaobai" id="biaobai">
@@ -80,18 +83,24 @@
                         <div class="tri"></div><span class="tri_number">1444</span>
                         <span class="mes_text">你说你不相信天长地久<br>我想我也不能为你证明<br>于我，在爱上你的那刻，时间就已经停止了</span>
                         <!-- 这里的桃心点赞还有问题 -->
-                        <a class="agree"><img src="image/heart.gif"><span>200</span></a>
+                        <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" id="z_heart"><span>200</span></a>
                     </li>
                     <li class="mes_li mes_li2">
                         <div class="tri"></div><span class="tri_number">2</span>
                          <span class="mes_text">（表白二）</span>
-                        <a class="agree"><img src="image/heart1.gif"><span>200</span></a>
+                        <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" ><span>200</span></a>
                     </li>
                     <li class="mes_li mes_li3">
                         <div class="tri"></div><span class="tri_number">1</span>
                          <span class="mes_text">（表白三）</span>
-                        <a class="agree"><img src="image/heart1.gif"><span>200</span></a>
+                        <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" ><span>200</span></a>
                     </li>
+                    <script type="text/javascript">
+                        function changeimg(){
+                            var img1=document.getElementById('z_heart');
+                            img1.src="image/heart.gif";
+                        }
+                    </script>
                     <li class="mes_li mes_li4"><input type="button" value="查看更多"></li>
                 </ul>
             </form>
