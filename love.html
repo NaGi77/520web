@@ -7,16 +7,19 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <link rel="stylesheet" type="text/css" href="css/public.css">
     <link rel="stylesheet" type="text/css" href="css/love.css">
+    <script src="js/bmob-min.js"></script>
+    <script src="js/bmobSocketIo-min.js"></script>
+    <script src="js/jquery.min.js"></script>
 </head>
 <body>
 	<div class="content">
 		<form>
 			<ul type="none" class="love_ul">
-				<li class="li1"><div class="from">From</div><div class="nick nick1"><input type="text" placeholder="你的昵称" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';"></div><div class="clear"></div></li>
+				<li class="li1"><div class="from">From</div><div class="nick nick1"><input type="text" placeholder="你的昵称" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';" id="nick"></div><div class="clear"></div></li>
 				<li class="li2"><div class="to">To</div>
 					<div class="nick nick2">
-					<input type="text" placeholder="对方昵称" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';">
-					<input type="text" placeholder="对方手机号" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';">
+					<input type="text" placeholder="对方昵称" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';" id="name">
+					<input type="text" placeholder="对方手机号" class="nickname" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';" id="tel">
 					<select id="dormitory" name="dormitory" onchange="this.style.color='#000';">
 						<option value="">宿舍区</option>
 						<option value="韵苑" onselect="this.style.color='#000';">韵苑</option>
@@ -24,16 +27,17 @@
 						<option value="沁园">沁园</option>
 					</select>
 					<div class="tri"><img src="image/tri.gif"></div>
-					<input type="text" placeholder="楼栋" class="ld_number" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';"><p>栋</p>
-					<input type="text" placeholder="寝室号" class="qs_number" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';"><p>号</p>
+					<input type="text" placeholder="楼栋" class="ld_number" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';" id="dor"><p>栋</p>
+					<input type="text" placeholder="寝室号" class="qs_number" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';" id="dornumber"><p>号</p>
 					<div class="clear"></div>
 				</div></li>
 				<li class="li3">
-					<textarea name="comment" rows="10" class="input textarea" onfocus="this.value=''; this.onfocus=null; document.getElementById('none_div').style.display='none'; this.style.color='#000';">开始写情书</textarea>
+					<textarea name="comment" rows="10" class="input textarea" onfocus="this.value=''; this.onfocus=null; document.getElementById('none_div').style.display='none'; this.style.color='#000';" id="textarea">开始写情书</textarea>
 					<div class="text_area" id="none_div">请输入不超过<p class="t_45">45</p>字</div>
 				</li>
 			</ul>
-			<input type="submit" value="提交" class="submit" onclick="newpage()">
+			<input type="submit" value="提交" class="submit"  id="send">
+			<a href="index.html" class="back123">返回</a>
 			<script type="text/javascript">
 				function newpage(){
                             window.open('index.html');
@@ -41,5 +45,109 @@
 			</script>
 		</form>
 	</div>
+	<script src="js/bmob-min.js"></script>
+	<script type="text/javascript">
+    function sendMsg(){
+        var nick= $("#nick").val();
+        var name= $('#name').val();
+        var tel= $('#tel').val();
+        var dormitory= $('#dormitory').val();
+        var dor= $('#dor').val();
+        var dornumber= $('#dornumber').val();
+        var textarea = $("#textarea").val();
+
+
+        if($.trim(nick)==""){
+            alert("你的昵称不能为空！");
+            return;
+        }
+		
+		if($.trim(name)==""){
+            alert("对方昵称不能为空！");
+            return;
+        }
+
+        if($.trim(tel)==""){
+            alert("对方手机号不能为空！");
+            return;
+        }
+
+         if($.trim(textarea)==""){
+            alert("内容不能为空！");
+            return;
+        }       
+
+        var Person = Bmob.Object.extend("Person");
+        var person = new Person();
+        person.set("nick", $("#nick").val());
+        person.set("name", $("#name").val());
+        person.set("tel", $("#tel").val());
+        person.set("dormitory", $("#dormitory").val());
+        person.set("dor", $("#dor").val());
+        person.set("dornumber", $("#dornumber").val());
+        person.set("textarea", $("#textarea").val());
+        person.save(null, {
+          success: function(object) {     
+         		alert("恭喜你，提交成功！");   
+         		newpage();   
+          },
+          error: function(model, error) {     
+          		alert("不好意思，提交失败了！");          
+          }
+        });     
+    }
+
+    //服务器
+    BmobSocketIo.initialize("94a9ab4b917a187f0033aeef5fabb005");
+    Bmob.initialize("94a9ab4b917a187f0033aeef5fabb005", "20d029e92630c3e938235f6870475de2");
+
+   //初始连接socket.io服务器后，需要监听的事件都写在这个函数内
+
+    BmobSocketIo.onInitListen = function() {
+      //订阅GameScore表的数据更新事件
+      BmobSocketIo.updateTable("Person");     
+    };
+
+      //监听服务器返回的更新表的数据
+   BmobSocketIo.onUpdateTable = function(tablename,data) {   
+     
+     if( tablename=="Person" ) {
+        window.alert("yes");
+     }
+   };
+/*这个是计数的*/
+        var GameScore = Bmob.Object.extend("Person");
+        var query = new Bmob.Query(GameScore);
+        query.count({
+            success: function(number) {
+                    /*alert(number+'yes');*/
+                  },
+                  error: function(error) {
+                  }
+                });
+/*计数完*/
+
+    $("#send").click(function(){
+        sendMsg(); 
+        alert('');
+    });
+
+  //通过“回车”提交聊天信息
+   $('#name').keydown(function(e) {
+    if (e.keyCode === 13) {
+      sendMsg();
+    }
+  });
+
+  //通过“回车”提交聊天信息
+   $('#textarea').keydown(function(e) {
+    if (e.keyCode === 13) {
+      sendMsg();
+      alert('');
+    }
+  });
+
+
+	</script>
 </body>
 </html>

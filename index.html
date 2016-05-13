@@ -7,6 +7,9 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <link rel="stylesheet" type="text/css" href="css/public.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="js/bmob-min.js"></script>
+    <script src="js/bmobSocketIo-min.js"></script>
+    <script src="js/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -32,23 +35,23 @@
             <div class="number1">
                 <div class="text">
                     <span class="line line_dot2"></span><span class="text_1">已有</span>
-                    <span class="text_2 text_red">203</span><span class="text_3">人</span><span class="text_4">参与告白</span>
+                    <span class="text_2 text_red" id="per_n">203</span><span class="text_3">人</span><span class="text_4">参与告白</span>
                 </div>
             </div>
              <div class="number1">                
                 <div class="text">
-                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_purple">279</span><span class="text_3">封</span><span class="text_4">情书</span>
+                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_purple" id="love_n">279</span><span class="text_3">封</span><span class="text_4">情书</span>
                 </div>
             </div>
              <div class="number1">               
                 <div class="text">
-                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_red">89</span><span class="text_3">个</span><span class="text_4">楼栋参与告白</span>
+                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_red" id="dor_n">89</span><span class="text_3">个</span><span class="text_4">楼栋参与告白</span>
                 </div>
             </div>
              <div class="number1">
                 <div class="text">
                     <span class="line line_dot2"></span><span class="text_1">已有</span>
-                    <span class="text_2 text_purple">289</span><span class="text_3">个</span><span class="text_4">寝室参与告白</span>
+                    <span class="text_2 text_purple" id="qs_n">289</span><span class="text_3">个</span><span class="text_4">寝室参与告白</span>
                 </div>
             </div>
         </div>
@@ -74,24 +77,26 @@
                     <span>请输入手机号</span>
                     <input type="text">
                     <input type="button" value="查询" onclick="hiddendiv()">
+                    <input type="button" value="返回" onclick="hiddendiv()">
+                    <a href="none.html">无人表白</a>
                 </div>
-                <input type="button" class="button button3 button_inline" value="最新表白">
-                <input type="button" class="button button4 button_inline" value="最热表白">
+                <input type="button" class="button button3 button_inline" value="最新表白" onclick="">
+                <input type="button" class="button button4 button_inline" value="最热表白" onclick="">
                 <div class="clear"></div>
-                <ul type="none" class="mes_ul">
+                <ul type="none" class="mes_ul" id="s">
                     <li class="mes_li mes_li1">
-                        <div class="tri"></div><span class="tri_number">1444</span>
+                        <div class="tri"></div><span class="tri_number" name="trinumber">1</span>
                         <span class="mes_text">你说你不相信天长地久<br>我想我也不能为你证明<br>于我，在爱上你的那刻，时间就已经停止了</span>
                         <!-- 这里的桃心点赞还有问题 -->
-                        <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" id="z_heart"><span>200</span></a>
+                        <a class="agree" href="javascript:;" onclick="changeimg();pulse()"  id="a1"><img src="image/heart1.gif" id="z_heart"><span id="sp1">200</span></a>
                     </li>
                     <li class="mes_li mes_li2">
                         <div class="tri"></div><span class="tri_number">2</span>
-                         <span class="mes_text">（表白二）</span>
+                         <span class="mes_text" id="bb2">（表白二）</span>
                         <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" ><span>200</span></a>
                     </li>
                     <li class="mes_li mes_li3">
-                        <div class="tri"></div><span class="tri_number">1</span>
+                        <div class="tri"></div><span class="tri_number">3</span>
                          <span class="mes_text">（表白三）</span>
                         <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" ><span>200</span></a>
                     </li>
@@ -100,11 +105,115 @@
                             var img1=document.getElementById('z_heart');
                             img1.src="image/heart.gif";
                         }
+                        function pulse(){
+                            var sp1=document.getElementById('sp1');
+                            sp1.innerHTML=parseInt(sp1.innerHTML)+1;
+                            sendMsg2();
+                        }
+
                     </script>
-                    <li class="mes_li mes_li4"><input type="button" value="查看更多"></li>
+                    <li class="mes_li mes_li4" id="li1"><input type="button" value="查看更多" onclick="newli()"></li>
+                    <script type="text/javascript">
+                        function newli(){
+                            var s=document.getElementById('s');
+                            var li1=document.getElementById('li1');
+                            var li= document.createElement("li");
+                            li.setAttribute("class", "mes_li");
+                            var txt="<div class='tri'>"+"</div>"+"<span class='tri_number'>"+'x'+"</span>"+
+                         "<span class='mes_text'>"+"（表白三）"+"</span>"+
+                       " <a class='agree' href='javascript:;'' onclick='changeimg()'>"+"<img src='image/heart1.gif' >"+"<span>200</span></a>";
+                            li.innerHTML=txt;
+                            s.insertBefore(li,s.childNodes[4]);
+                        }
+                    </script>
                 </ul>
             </form>
         </div>
     </div>
+     <script type="text/javascript">
+         function sendMsg(){
+                var pern= $("#per_n").text();
+                var love= $("#love_n").text();
+                var dorn= $("#dor_n").text();
+                var qs= $("#qs_n").text();
+                var Index= Bmob.Object.extend("Index");
+                var index = new Index();
+                index.set("pern", $("#per_n").text());
+                index.set("love", $("#love_n").text());
+                index.set("dorn", $("#dor_n").text());
+                index.set("qs", $("#qs_n").text());
+                index.save(null, {
+                    success: function(object) {     
+                    },
+                    error: function(model, error) {            
+                        }
+                    });     
+                }
+
+            function    sendMsg2(){
+                var zan1=  $("#sp1").text();
+                var Zan= Bmob.Object.extend("Zan");
+                var zan = new Zan();
+                zan.set("zan1", $("#sp1").text());
+                zan.save(null, {
+                    success: function(object) {     
+                    },
+                    error: function(model, error) {            
+                        }
+                    });   
+            }
+            function getzan(){
+                 var zan1=  $("#sp1").text();
+                var GameScore = Bmob.Object.extend("Zan");
+                var query = new Bmob.Query(GameScore);
+                query.get('959c7b288e', {
+                    success: function(object) {     
+                   zan1=object.get("zan1");
+                    },
+      error: function(object, error) {
+      }
+    });
+            }
+                //服务器
+                BmobSocketIo.initialize("94a9ab4b917a187f0033aeef5fabb005");
+                Bmob.initialize("94a9ab4b917a187f0033aeef5fabb005", "20d029e92630c3e938235f6870475de2");
+
+               //初始连接socket.io服务器后，需要监听的事件都写在这个函数内
+
+                BmobSocketIo.onInitListen = function() {
+                  //订阅GameScore表的数据更新事件
+                  BmobSocketIo.updateTable(Person);     
+                };
+
+                  //监听服务器返回的更新表的数据
+               BmobSocketIo.onUpdateTable = function(tablename,data) {}
+
+                var GameScore = Bmob.Object.extend("Person");
+                var query = new Bmob.Query(GameScore);
+                query.get("f0b0f8669f", {
+                  success: function(object) {
+                    // The object was retrieved successfully.
+                    var p = document.getElementById('bb2');
+                    p.innerHTML=object.get("textarea");
+                    var tn = document.getElementsByName('trinumber');
+                  },
+                  error: function(object, error) {
+                    alert("query object fail");
+                  }
+                });
+                query.count({
+                  success: function(number) {
+                    // There are number instances of MyClass.
+                    /*alert(number+'yes');*/
+                  },
+
+                  error: function(error) {
+                    // error is an instance of Bmob.Error.
+                  }
+                });
+
+                sendMsg();
+                getzan();
+      </script>
 </body>
 </html>
