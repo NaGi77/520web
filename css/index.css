@@ -256,7 +256,7 @@
 /*我要表白界面*/
 .biaobai{
 	width: 80%;
-	left: 10%;
+	margin-left: 5%;
 	display: none;
 	position: fixed;
 	top: 50%;
@@ -264,4 +264,15 @@
 	margin-top: -50px;
 	background: pink;
 	z-index: 999;
+}
+.biaobai span{
+	display: block;
+}
+.biaobai input{
+	background: #fff;
+	border: 2px solid #DCDCDC;
+	color: #C2C2C2;
+}
+.bb_tel{
+	display: block;
 }

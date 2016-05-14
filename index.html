@@ -75,7 +75,7 @@
                 </script>
                 <div class="biaobai" id="biaobai">
                     <span>请输入手机号</span>
-                    <input type="text">
+                    <input type="text" placeholder="对方手机号" class="bb_tel">
                     <input type="button" value="查询" onclick="hiddendiv()">
                     <input type="button" value="返回" onclick="hiddendiv()">
                     <a href="none.html">无人表白</a>
@@ -162,18 +162,6 @@
                         }
                     });   
             }
-            function getzan(){
-                 var zan1=  $("#sp1").text();
-                var GameScore = Bmob.Object.extend("Zan");
-                var query = new Bmob.Query(GameScore);
-                query.get('959c7b288e', {
-                    success: function(object) {     
-                   zan1=object.get("zan1");
-                    },
-      error: function(object, error) {
-      }
-    });
-            }
                 //服务器
                 BmobSocketIo.initialize("94a9ab4b917a187f0033aeef5fabb005");
                 Bmob.initialize("94a9ab4b917a187f0033aeef5fabb005", "20d029e92630c3e938235f6870475de2");
@@ -209,6 +197,62 @@
 
                   error: function(error) {
                     // error is an instance of Bmob.Error.
+                  }
+                });
+
+
+                /*有多少人*/
+                var GameScore = Bmob.Object.extend("Person");
+                var query = new Bmob.Query(GameScore);
+                var pern=document.getElementById('per_n');
+                var love=document.getElementById('love_n');
+                var dorn=document.getElementById('dor_n');
+                var qsn=document.getElementById('qs_n');
+                var a=-1;
+                var c=0;
+                var b=0;
+                var nick123=new Array();
+
+                // 查询所有数据
+                query.find({
+                  success: function(results) {
+
+                function number123(obj){
+                // 循环处理查询到的数据
+                        c=0;
+                        a=-1;
+                        for (var i = 0; i < results.length; i++) {
+                          var object = results[i];
+                          var nick=object.get(obj);
+                            nick123[i]=nick;
+                        }
+                        for (var j = 0; j<results.length; j++) { 
+                            var object = results[j];
+                            var nick=object.get(obj);
+                            for (var i = j; i < results.length; i++) {
+                               if (nick123[i]==nick) {
+                                    a=a+1;
+                                };                           
+                            };
+                            if(a!=0||nick==''){
+                                    c=c+1;
+                            };   
+                            a=-1;
+                        };
+
+                }
+                    love.innerHTML= results.length;
+                    number123('nick');
+                    pern.innerHTML =results.length-c;
+                    number123('dornumber');
+                    qsn.innerHTML =results.length-c+7;
+                    number123('dor');
+                    dorn.innerHTML =results.length-c;
+                    /*楼*/
+
+                  },
+                  error: function(error) {
+                    alert("查询失败: " + error.code + " " + error.message);
                   }
                 });
 
