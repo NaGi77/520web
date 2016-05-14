@@ -65,8 +65,16 @@
                             var div1=document.getElementById('biaobai');
                             div1.style.display="block";
                         }
+                        function newfind(){
+                            var div1=document.getElementById('findnew');
+                            div1.style.display="block";
+                        }
                         function hiddendiv(){
                             var div1=document.getElementById('biaobai');
+                            div1.style.display="none";
+                        }
+                        function hiddenfind(){
+                            var div1=document.getElementById('findnew');
                             div1.style.display="none";
                         }
                         function newpage(){
@@ -74,12 +82,66 @@
                         }
                 </script>
                 <div class="biaobai" id="biaobai">
-                    <span>请输入手机号</span>
-                    <input type="text" placeholder="对方手机号" class="bb_tel">
-                    <input type="button" value="查询" onclick="hiddendiv()">
-                    <input type="button" value="返回" onclick="hiddendiv()">
-                    <a href="none.html">无人表白</a>
+                    <input type="text" placeholder="请输入您的手机号" class="bb_tel" id="find">
+                    <input type="button" value="查询" onclick="find123()" id="cx">
+                    <img src="image/cx.gif" >
+                    <input type="button" value="×" onclick="hiddendiv()" id="fh">
                 </div>
+                <!-- 查询后有人表白 -->
+                <div class="findnew" id="findnew">
+                    <input type="button" value="×" onclick="hiddenfind()">
+                    <ul type="none" id="findul">
+                        <li class="findli"><span>表白人昵称：</span><span >nick</span><span>表白内容：</span><span >123</span></li>
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                function newfindli(){
+                            var findul=document.getElementById('findul');
+                            var li= document.createElement("li");
+                            li.setAttribute("class", "findli");
+                            var txt="<span>表白人昵称：</span>"+"<span id='findnick'></span><span>表白内容：</span>"+"<span id='findlove'></span>";
+                            li.innerHTML=txt;
+                            findul.insertBefore(li,findul.childNodes[2]);
+                }
+
+                function find123(){
+                    var GameScore = Bmob.Object.extend("Person");
+                    var query = new Bmob.Query(GameScore);
+                    var b=0;
+                    var find=document.getElementById('find').value;
+                    if($.trim(find)==""){
+                        alert("对方昵称不能为空！");
+                        return;
+                    }
+                    // 查询所有数据
+                    query.find({
+                        success: function(results) {
+                                // 循环处理查询到的数据
+                                for (var i = 0; i < results.length; i++) {
+                                  var object = results[i];
+                                  var tel=object.get('tel');
+                                  if (tel==find) {
+                                    b=b+1;
+                                    newfindli();
+                                    document.getElementById('findnick').innerHTML=object.get('nick');
+                                    document.getElementById('findlove').innerHTML=object.get('textarea');
+                                    if(b==1){
+                                        newfind();
+                                    }
+                                  };
+                                }
+                                if (b==0) {
+                                    window.open('none.html');
+                                  };
+                              },
+                              error: function(error) {
+                                alert("查询失败: " + error.code + " " + error.message);
+                              }
+                        });
+
+                    hiddendiv();
+                }
+                </script>
                 <input type="button" class="button button3 button_inline" value="最新表白" onclick="">
                 <input type="button" class="button button4 button_inline" value="最热表白" onclick="">
                 <div class="clear"></div>
@@ -123,7 +185,7 @@
                          "<span class='mes_text'>"+"（表白三）"+"</span>"+
                        " <a class='agree' href='javascript:;'' onclick='changeimg()'>"+"<img src='image/heart1.gif' >"+"<span>200</span></a>";
                             li.innerHTML=txt;
-                            s.insertBefore(li,s.childNodes[4]);
+                            s.insertBefore(li,s.childNodes[6]);
                         }
                     </script>
                 </ul>
@@ -257,7 +319,6 @@
                 });
 
                 sendMsg();
-                getzan();
       </script>
 </body>
 </html>

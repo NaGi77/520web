@@ -131,21 +131,29 @@ span{
 	color: #CACACA;
 }
 .submit{
-	width: 80px;
-	height: 20px;
+	display: inline-block;
+	width: 50%;
+	height: 40px;
 	float: right;
-	margin-right: 10%;
+	background: #DB5D5E;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	color: #fff;
+	font-size: 16px;
 }
 .back123{
 	display: inline-block;
-	width: 80px;
+	float: right;
+	width:49.9%;
+	height: 31px;
 	text-decoration: none;
-	background: #fff;
-	border: 2px solid #DCDCDC;
-	font-size: 12px;
-	color: #C2C2C2;
-	margin:0 0 0 15%;
-	height: 18px;
-	margin-top: -30px;	
+	background: #A87EA6;
+	font-size: 16px;
+	color: #fff;
+	padding-top: 9px;
 	text-align: center;
+}
+.div123{
+	margin-top: 30px;
 }

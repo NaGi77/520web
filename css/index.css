@@ -255,14 +255,15 @@
 }
 /*我要表白界面*/
 .biaobai{
-	width: 80%;
-	margin-left: 5%;
+	width: 70%;
+	margin-left: 10%;
 	display: none;
 	position: fixed;
 	top: 50%;
-	height: 100px;
-	margin-top: -50px;
-	background: pink;
+	height: 120px;
+	margin-top: -75px;
+	background: #FBD5DA;
+	border: 3px solid #DB5D6F;
 	z-index: 999;
 }
 .biaobai span{
@@ -275,4 +276,64 @@
 }
 .bb_tel{
 	display: block;
+	width: 73%;
+	margin-left: 7%;
+	margin-top:47px;
+	height: 26px;
+	padding-left: 5px;
+}
+#cx{
+	background: none;
+	border: none;
+	float: right;
+	position: absolute;
+	right: 12px;
+	font-size: 10px;
+	top: 50px;
+	color: #fff;
+	z-index: 9999;
+}
+.biaobai img{
+	position: absolute;
+	width: 35px;
+	height: 32px;
+	top: 45px;
+	right: 8px;
+}
+#fh{
+	position: absolute;
+	background: #DB5D5E;
+	color: #fff;
+	font-size: 10px;
+	text-align: center;
+	border: 0px;
+	top:0;
+	right: 0;
+	height: 15px;width: 15px;
+}
+
+/*查询有人表白显示的界面*/
+.findnew{
+	position: fixed;
+	width: 80%;
+	margin:auto;
+	background: #fff;
+	z-index: 999;
+	top: 10%;
+	left: 10%;
+	display: none;
+}
+.findnew input{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background: #A87EA6;
+	color: #fff;
+	height: 20px;
+	width: 20px;
+	border:none;
+}
+.findli{
+	border: 1px #000 solid;
+	background: pink;
 }
