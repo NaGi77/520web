@@ -89,19 +89,27 @@
                 </div>
                 <!-- 查询后有人表白 -->
                 <div class="findnew" id="findnew">
-                    <input type="button" value="×" onclick="hiddenfind()">
-                    <ul type="none" id="findul">
-                        <li class="findli"><span>表白人昵称：</span><span >nick</span><span>表白内容：</span><span >123</span></li>
+                    <span class="findtext findtext1">你现在已经收到了</span><span class="findtext2" id="findnumber">25</span><span class="findtext findtext3">封情书</span>
+                    <ul type="none" id="findul" class="findul">
                     </ul>
+                    <input type="button" value="查看全部" onclick="both()" class="findbut3" id="both123">
+                    <img src="image/have.gif" class="haveimg" id="findimg">
+                    <input type="button" value="回主页面" onclick="hiddenfind()" class="findbut findbut1">
+                    <input type="button" value="马上表白" onclick="newpage()" class="findbut findbut2">
                 </div>
                 <script type="text/javascript">
+                function both(){
+                    document.getElementById('findimg').style.display="none";
+                    document.getElementById('findul').style.height="auto";
+                    document.getElementById('both123').style.display="none";
+                }
                 function newfindli(){
                             var findul=document.getElementById('findul');
                             var li= document.createElement("li");
                             li.setAttribute("class", "findli");
-                            var txt="<span>表白人昵称：</span>"+"<span id='findnick'></span><span>表白内容：</span>"+"<span id='findlove'></span>";
+                            var txt="<span id='findlove'>"+"</span>"+"<span id='findtime'>"+"</span>"+"<div class='findposition'>"+"<span class='findfrom'>"+"from:</span>"+"<span id='findnick'>"+"</span></div>"+"<div class='findposition2'>"+"<span class='findfrom'>"+"to:</span>"+"<span id='find2nick'>"+"</span></div>";
                             li.innerHTML=txt;
-                            findul.insertBefore(li,findul.childNodes[2]);
+                            findul.insertBefore(li,findul.childNodes[0]);
                 }
 
                 function find123(){
@@ -122,14 +130,17 @@
                                   var tel=object.get('tel');
                                   if (tel==find) {
                                     b=b+1;
-                                    newfindli();
-                                    document.getElementById('findnick').innerHTML=object.get('nick');
-                                    document.getElementById('findlove').innerHTML=object.get('textarea');
                                     if(b==1){
                                         newfind();
                                     }
-                                  };
+                                    newfindli();
+                                    document.getElementById('findnick').innerHTML=object.get('nick');
+                                   document.getElementById('findtime').innerHTML=object.createdAt;
+                                    document.getElementById('findlove').innerHTML=object.get('textarea');
+                                    document.getElementById('find2nick').innerHTML=object.get('name');
+                                  }; 
                                 }
+                                 document.getElementById('findnumber').innerHTML=b;
                                 if (b==0) {
                                     window.open('none.html');
                                   };
@@ -138,7 +149,6 @@
                                 alert("查询失败: " + error.code + " " + error.message);
                               }
                         });
-
                     hiddendiv();
                 }
                 </script>

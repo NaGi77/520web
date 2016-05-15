@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>520</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=0,maximum-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <link rel="stylesheet" type="text/css" href="css/public.css">
+    <link rel="stylesheet" type="text/css" href="css/have.css">
+    <script src="js/bmob-min.js"></script>
+    <script src="js/bmobSocketIo-min.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+	<div class="content">
+		  <!-- 查询后有人表白 -->11111111111111111
+        <div class="findnew" id="findnew">
+            <ul type="none" id="findul">
+                <li class="findli"><span>表白人昵称：</span><span >nick</span><span>表白内容：</span><span >123</span></li>
+            </ul>
+        </div>
+	</div>
+	<script type="text/javascript">
+        function newfindli(){
+                var findul=document.getElementById('findul');
+                var li= document.createElement("li");
+                li.setAttribute("class", "findli");
+                var txt="<span>表白人昵称：</span>"+"<span id='findnick'></span><span>表白内容：</span>"+"<span id='findlove'></span>";
+                li.innerHTML=txt;
+                findul.insertBefore(li,findul.childNodes[2]);
+    }
+
+	function find123(){
+                    var GameScore = Bmob.Object.extend("Person");
+                    var query = new Bmob.Query(GameScore);
+                    var b=0;
+                    var find=document.getElementById('find').value;
+                    // 查询所有数据
+                    query.find({
+                        success: function(results) {
+                                // 循环处理查询到的数据
+                                for (var i = 0; i < results.length; i++) {
+                                  var object = results[i];
+                                  var tel=object.get('tel');
+                                  if (tel==find) {
+                                    b=b+1;
+                                    newfindli();
+                                    document.getElementById('findnick').innerHTML=object.get('nick');
+                                    document.getElementById('findlove').innerHTML=object.get('textarea');
+                                    if(b==1){
+                                        window.open('have.html');
+                                    }
+                                  };
+                                }
+                                if (b==0) {
+                                    window.open('none.html');
+                                  };
+                              },
+                              error: function(error) {
+                                alert("查询失败: " + error.code + " " + error.message);
+                              }
+                        });
+
+                    hiddendiv();
+                }
+    //服务器
+                BmobSocketIo.initialize("94a9ab4b917a187f0033aeef5fabb005");
+                Bmob.initialize("94a9ab4b917a187f0033aeef5fabb005", "20d029e92630c3e938235f6870475de2");
+
+               //初始连接socket.io服务器后，需要监听的事件都写在这个函数内
+
+                BmobSocketIo.onInitListen = function() {
+                  //订阅GameScore表的数据更新事件
+                  BmobSocketIo.updateTable(Person);     
+                };
+
+                  //监听服务器返回的更新表的数据
+               BmobSocketIo.onUpdateTable = function(tablename,data) {}
+	</script>
+</body>
+</html>
