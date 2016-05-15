@@ -7,6 +7,9 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <link rel="stylesheet" type="text/css" href="css/public.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="js/bmob-min.js"></script>
+    <script src="js/bmobSocketIo-min.js"></script>
+    <script src="js/jquery.min.js"></script>
 </head>
 <body>
     <header>
@@ -32,23 +35,23 @@
             <div class="number1">
                 <div class="text">
                     <span class="line line_dot2"></span><span class="text_1">已有</span>
-                    <span class="text_2 text_red">203</span><span class="text_3">人</span><span class="text_4">参与告白</span>
+                    <span class="text_2 text_red" id="per_n">203</span><span class="text_3">人</span><span class="text_4">参与告白</span>
                 </div>
             </div>
              <div class="number1">                
                 <div class="text">
-                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_purple">279</span><span class="text_3">封</span><span class="text_4">情书</span>
+                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_purple" id="love_n">279</span><span class="text_3">封</span><span class="text_4">情书</span>
                 </div>
             </div>
              <div class="number1">               
                 <div class="text">
-                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_red">89</span><span class="text_3">个</span><span class="text_4">楼栋参与告白</span>
+                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_red" id="dor_n">89</span><span class="text_3">个</span><span class="text_4">楼栋参与告白</span>
                 </div>
             </div>
              <div class="number1">
                 <div class="text">
                     <span class="line line_dot2"></span><span class="text_1">已有</span>
-                    <span class="text_2 text_purple">289</span><span class="text_3">个</span><span class="text_4">寝室参与告白</span>
+                    <span class="text_2 text_purple" id="qs_n">289</span><span class="text_3">个</span><span class="text_4">寝室参与告白</span>
                 </div>
             </div>
         </div>
@@ -62,8 +65,16 @@
                             var div1=document.getElementById('biaobai');
                             div1.style.display="block";
                         }
+                        function newfind(){
+                            var div1=document.getElementById('findnew');
+                            div1.style.display="block";
+                        }
                         function hiddendiv(){
                             var div1=document.getElementById('biaobai');
+                            div1.style.display="none";
+                        }
+                        function hiddenfind(){
+                            var div1=document.getElementById('findnew');
                             div1.style.display="none";
                         }
                         function newpage(){
@@ -71,27 +82,93 @@
                         }
                 </script>
                 <div class="biaobai" id="biaobai">
-                    <span>请输入手机号</span>
-                    <input type="text">
-                    <input type="button" value="查询" onclick="hiddendiv()">
+                    <input type="text" placeholder="请输入您的手机号" class="bb_tel" id="find">
+                    <input type="button" value="查询" onclick="find123()" id="cx">
+                    <img src="image/cx.gif" >
+                    <input type="button" value="×" onclick="hiddendiv()" id="fh">
                 </div>
-                <input type="button" class="button button3 button_inline" value="最新表白">
-                <input type="button" class="button button4 button_inline" value="最热表白">
+                <!-- 查询后有人表白 -->
+                <div class="findnew" id="findnew">
+                    <span class="findtext findtext1">你现在已经收到了</span><span class="findtext2" id="findnumber">25</span><span class="findtext findtext3">封情书</span>
+                    <ul type="none" id="findul" class="findul">
+                    </ul>
+                    <input type="button" value="查看全部" onclick="both()" class="findbut3" id="both123">
+                    <img src="image/have.gif" class="haveimg" id="findimg">
+                    <input type="button" value="回主页面" onclick="hiddenfind()" class="findbut findbut1">
+                    <input type="button" value="马上表白" onclick="newpage()" class="findbut findbut2">
+                </div>
+                <script type="text/javascript">
+                function both(){
+                    document.getElementById('findimg').style.display="none";
+                    document.getElementById('findul').style.height="auto";
+                    document.getElementById('both123').style.display="none";
+                }
+                function newfindli(){
+                            var findul=document.getElementById('findul');
+                            var li= document.createElement("li");
+                            li.setAttribute("class", "findli");
+                            var txt="<span id='findlove'>"+"</span>"+"<span id='findtime'>"+"</span>"+"<div class='findposition'>"+"<span class='findfrom'>"+"from:</span>"+"<span id='findnick'>"+"</span></div>"+"<div class='findposition2'>"+"<span class='findfrom'>"+"to:</span>"+"<span id='find2nick'>"+"</span></div>";
+                            li.innerHTML=txt;
+                            findul.insertBefore(li,findul.childNodes[0]);
+                }
+
+                function find123(){
+                    var GameScore = Bmob.Object.extend("Person");
+                    var query = new Bmob.Query(GameScore);
+                    var b=0;
+                    var find=document.getElementById('find').value;
+                    if($.trim(find)==""){
+                        alert("对方昵称不能为空！");
+                        return;
+                    }
+                    // 查询所有数据
+                    query.find({
+                        success: function(results) {
+                                // 循环处理查询到的数据
+                                for (var i = 0; i < results.length; i++) {
+                                  var object = results[i];
+                                  var tel=object.get('tel');
+                                  if (tel==find) {
+                                    b=b+1;
+                                    if(b==1){
+                                        newfind();
+                                    }
+                                    newfindli();
+                                    document.getElementById('findnick').innerHTML=object.get('nick');
+                                   document.getElementById('findtime').innerHTML=object.createdAt;
+                                    document.getElementById('findlove').innerHTML=object.get('textarea');
+                                    document.getElementById('find2nick').innerHTML=object.get('name');
+                                  }; 
+                                }
+                                 document.getElementById('findnumber').innerHTML=b;
+                                if (b==0) {
+                                    window.open('none.html');
+                                  };
+                              },
+                              error: function(error) {
+                                alert("查询失败: " + error.code + " " + error.message);
+                              }
+                        });
+                    hiddendiv();
+                }
+                </script>
+                <input type="button" class="button button3 button_inline" value="最新表白" onclick="">
+                <input type="button" class="button button4 button_inline" value="最热表白" onclick="">
                 <div class="clear"></div>
-                <ul type="none" class="mes_ul">
+                <ul type="none" class="mes_ul" id="s">
                     <li class="mes_li mes_li1">
-                        <div class="tri"></div><span class="tri_number">1444</span>
+                        <div class="tri"></div><span class="tri_number" name="trinumber">1</span>
                         <span class="mes_text">你说你不相信天长地久<br>我想我也不能为你证明<br>于我，在爱上你的那刻，时间就已经停止了</span>
                         <!-- 这里的桃心点赞还有问题 -->
-                        <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" id="z_heart"><span>200</span></a>
+                        <a class="agree" href="javascript:;" onclick="changeimg();pulse()"  id="a1"><img src="image/heart1.gif" id="z_heart"><span id="sp1">200</span></a>
                     </li>
                     <li class="mes_li mes_li2">
                         <div class="tri"></div><span class="tri_number">2</span>
-                         <span class="mes_text">（表白二）</span>
+                         <span class="mes_text" id="bb2">（表白二）</span>
                         <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" ><span>200</span></a>
                     </li>
                     <li class="mes_li mes_li3">
-                        <div class="tri"></div><span class="tri_number">1</span>
+                        <div class="tri"></div><span class="tri_number">3</span>
                          <span class="mes_text">（表白三）</span>
                         <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" ><span>200</span></a>
                     </li>
@@ -100,11 +177,158 @@
                             var img1=document.getElementById('z_heart');
                             img1.src="image/heart.gif";
                         }
+                        function pulse(){
+                            var sp1=document.getElementById('sp1');
+                            sp1.innerHTML=parseInt(sp1.innerHTML)+1;
+                            sendMsg2();
+                        }
+
                     </script>
-                    <li class="mes_li mes_li4"><input type="button" value="查看更多"></li>
+                    <li class="mes_li mes_li4" id="li1"><input type="button" value="查看更多" onclick="newli()"></li>
+                    <script type="text/javascript">
+                        function newli(){
+                            var s=document.getElementById('s');
+                            var li1=document.getElementById('li1');
+                            var li= document.createElement("li");
+                            li.setAttribute("class", "mes_li");
+                            var txt="<div class='tri'>"+"</div>"+"<span class='tri_number'>"+'x'+"</span>"+
+                         "<span class='mes_text'>"+"（表白三）"+"</span>"+
+                       " <a class='agree' href='javascript:;'' onclick='changeimg()'>"+"<img src='image/heart1.gif' >"+"<span>200</span></a>";
+                            li.innerHTML=txt;
+                            s.insertBefore(li,s.childNodes[6]);
+                        }
+                    </script>
                 </ul>
             </form>
         </div>
     </div>
+     <script type="text/javascript">
+         function sendMsg(){
+                var pern= $("#per_n").text();
+                var love= $("#love_n").text();
+                var dorn= $("#dor_n").text();
+                var qs= $("#qs_n").text();
+                var Index= Bmob.Object.extend("Index");
+                var index = new Index();
+                index.set("pern", $("#per_n").text());
+                index.set("love", $("#love_n").text());
+                index.set("dorn", $("#dor_n").text());
+                index.set("qs", $("#qs_n").text());
+                index.save(null, {
+                    success: function(object) {     
+                    },
+                    error: function(model, error) {            
+                        }
+                    });     
+                }
+
+            function    sendMsg2(){
+                var zan1=  $("#sp1").text();
+                var Zan= Bmob.Object.extend("Zan");
+                var zan = new Zan();
+                zan.set("zan1", $("#sp1").text());
+                zan.save(null, {
+                    success: function(object) {     
+                    },
+                    error: function(model, error) {            
+                        }
+                    });   
+            }
+                //服务器
+                BmobSocketIo.initialize("94a9ab4b917a187f0033aeef5fabb005");
+                Bmob.initialize("94a9ab4b917a187f0033aeef5fabb005", "20d029e92630c3e938235f6870475de2");
+
+               //初始连接socket.io服务器后，需要监听的事件都写在这个函数内
+
+                BmobSocketIo.onInitListen = function() {
+                  //订阅GameScore表的数据更新事件
+                  BmobSocketIo.updateTable(Person);     
+                };
+
+                  //监听服务器返回的更新表的数据
+               BmobSocketIo.onUpdateTable = function(tablename,data) {}
+
+                var GameScore = Bmob.Object.extend("Person");
+                var query = new Bmob.Query(GameScore);
+                query.get("f0b0f8669f", {
+                  success: function(object) {
+                    // The object was retrieved successfully.
+                    var p = document.getElementById('bb2');
+                    p.innerHTML=object.get("textarea");
+                    var tn = document.getElementsByName('trinumber');
+                  },
+                  error: function(object, error) {
+                    alert("query object fail");
+                  }
+                });
+                query.count({
+                  success: function(number) {
+                    // There are number instances of MyClass.
+                    /*alert(number+'yes');*/
+                  },
+
+                  error: function(error) {
+                    // error is an instance of Bmob.Error.
+                  }
+                });
+
+
+                /*有多少人*/
+                var GameScore = Bmob.Object.extend("Person");
+                var query = new Bmob.Query(GameScore);
+                var pern=document.getElementById('per_n');
+                var love=document.getElementById('love_n');
+                var dorn=document.getElementById('dor_n');
+                var qsn=document.getElementById('qs_n');
+                var a=-1;
+                var c=0;
+                var b=0;
+                var nick123=new Array();
+
+                // 查询所有数据
+                query.find({
+                  success: function(results) {
+
+                function number123(obj){
+                // 循环处理查询到的数据
+                        c=0;
+                        a=-1;
+                        for (var i = 0; i < results.length; i++) {
+                          var object = results[i];
+                          var nick=object.get(obj);
+                            nick123[i]=nick;
+                        }
+                        for (var j = 0; j<results.length; j++) { 
+                            var object = results[j];
+                            var nick=object.get(obj);
+                            for (var i = j; i < results.length; i++) {
+                               if (nick123[i]==nick) {
+                                    a=a+1;
+                                };                           
+                            };
+                            if(a!=0||nick==''){
+                                    c=c+1;
+                            };   
+                            a=-1;
+                        };
+
+                }
+                    love.innerHTML= results.length;
+                    number123('nick');
+                    pern.innerHTML =results.length-c;
+                    number123('dornumber');
+                    qsn.innerHTML =results.length-c+7;
+                    number123('dor');
+                    dorn.innerHTML =results.length-c;
+                    /*楼*/
+
+                  },
+                  error: function(error) {
+                    alert("查询失败: " + error.code + " " + error.message);
+                  }
+                });
+
+                sendMsg();
+      </script>
 </body>
 </html>

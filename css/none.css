@@ -1,0 +1,59 @@
+span{
+	color: #000;
+	display: block;
+	width: 100%;
+	text-align: center;
+	font-size: 12px;
+}
+p{
+	display: inline-block;
+	color: #E33032;
+}
+a{
+	float: left;
+	width: 50%;
+	text-decoration: none;
+	text-align: center;
+	height: 30px;
+	color: #fff;
+	padding-top: 2px;
+	font-size: 18px;
+}
+.arrow{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	margin-left: 50px;
+	padding-left: 86px;
+}
+.noneimg{
+	display: block;
+	width: 80%;
+	margin:auto;
+	margin-top: 25px;
+	margin-bottom: 10px; 
+	max-width: 450px;
+}
+.text1{
+	font-size:55px;
+	margin: 30px 0px 5px 0px;
+}
+.text2{
+	font-size: 14px;
+}
+.text3{
+	line-height: 1.5em;
+	position: relative;
+}
+.text4{
+	position: absolute;
+	top:28px;
+	left: 50%;
+	margin-left: -42px;
+}
+.back{
+	background: #EB5B98;
+}
+.love{
+	background: #BA8FAF;
+}
