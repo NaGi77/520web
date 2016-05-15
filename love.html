@@ -91,7 +91,7 @@
         person.save(null, {
           success: function(object) {     
          		alert("恭喜你，提交成功！");   
-         		newpage();   
+         		newpage();
           },
           error: function(model, error) {     
           		alert("不好意思，提交失败了！");          
@@ -114,7 +114,6 @@
    BmobSocketIo.onUpdateTable = function(tablename,data) {   
      
      if( tablename=="Person" ) {
-        window.alert("yes");
      }
    };
 /*这个是计数的*/
@@ -130,7 +129,7 @@
 /*计数完*/
 
     $("#send").click(function(){
-        sendMsg(); 
+        sendMsg();
         alert('');
     });
 
