@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>&nbsp;四年生活·华科表白墙&nbsp;</title>
+    <title>四年生活表白墙</title>
     <meta charset='utf-8' />
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=0,maximum-scale=1">
     <meta content="yes" name="apple-mobile-web-app-capable" />
@@ -11,24 +11,15 @@
     <script src="js/bmobSocketIo-min.js"></script>
     <script src="js/jquery.min.js"></script>
 </head>
-<body onload="newtext()">
-    <script language=javascript >
-    var text=document.title;
-    var timerID;
-    function newtext() {
-                clearTimeout(timerID);                  
-                document.title=text.substring(1,text.length)+text.substring(0,1);
-                text=document.title.substring(0,text.length);
-                timerID = setTimeout("newtext()", 500);
-    }
-    </script>
+<body >
     <header>
         <div class="topbg"><img src="image/topbg.gif">
             <div class="top_bg"></div>
             <span class="top_text top_520">520</span>
             <span class="top_text top_love1">爱就说出来</span>
             <span class="top_text top_love2">敢爱敢表白</span>
-            <span class="top_text top_love3"><img src="image/text1.gif">一封情书<br>，一束玫瑰<img src="image/text2.gif"></span>
+            <span class="top_text top_love3"><img src="image/text1.gif">你写情书<br>，我送玫瑰<img src="image/text2.gif"></span>
+            <span class="top_text p123">获赞最多的9个表白词，我们将会送玫瑰给对方</span>
         </div>
     </header>
     <div class="content">
