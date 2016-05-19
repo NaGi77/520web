@@ -35,23 +35,23 @@
             <div class="number1">
                 <div class="text">
                     <span class="line line_dot2"></span><span class="text_1">已有</span>
-                    <span class="text_2 text_red" id="per_n">203</span><span class="text_3">人</span><span class="text_4">参与告白</span>
+                    <span class="text_2 text_red" id="per_n">XXX</span><span class="text_3">人</span><span class="text_4">参与告白</span>
                 </div>
             </div>
              <div class="number1">                
                 <div class="text">
-                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_purple" id="love_n">279</span><span class="text_3">封</span><span class="text_4">情书</span>
+                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_purple" id="love_n">XXX</span><span class="text_3">封</span><span class="text_4">情书</span>
                 </div>
             </div>
              <div class="number1">               
                 <div class="text">
-                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_red" id="dor_n">89</span><span class="text_3">个</span><span class="text_4">楼栋参与告白</span>
+                    <span class="line line_dot2"></span><span class="text_1">已有</span><span class="text_2 text_red" id="dor_n">XX</span><span class="text_3">个</span><span class="text_4">楼栋参与告白</span>
                 </div>
             </div>
              <div class="number1">
                 <div class="text">
                     <span class="line line_dot2"></span><span class="text_1">已有</span>
-                    <span class="text_2 text_purple" id="qs_n">289</span><span class="text_3">个</span><span class="text_4">寝室参与告白</span>
+                    <span class="text_2 text_purple" id="qs_n">XXX</span><span class="text_3">个</span><span class="text_4">寝室参与告白</span>
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
                 </div>
                 <!-- 查询后有人表白 -->
                 <div class="findnew" id="findnew">
-                    <span class="findtext findtext1">你现在已经收到了</span><span class="findtext2" id="findnumber">25</span><span class="findtext findtext3">封情书</span>
+                    <span class="findtext findtext1">你现在已经收到了</span><span class="findtext2" id="findnumber">XX</span><span class="findtext findtext3">封情书</span>
                     <ul type="none" id="findul" class="findul">
                     </ul>
                     <input type="button" value="查看全部" onclick="both()" class="findbut3" id="both123">
@@ -98,29 +98,29 @@
                     <input type="button" value="马上表白" onclick="newpage()" class="findbut findbut2">
                 </div>
                 <script type="text/javascript">
-                function both(){
+                    function both(){
                     document.getElementById('findimg').style.display="none";
                     document.getElementById('findul').style.height="auto";
                     document.getElementById('both123').style.display="none";
-                }
-                function newfindli(){
+                 }
+                    function newfindli(){
                             var findul=document.getElementById('findul');
                             var li= document.createElement("li");
                             li.setAttribute("class", "findli");
                             var txt="<span id='findlove'>"+"</span>"+"<span id='findtime'>"+"</span>"+"<div class='findposition'>"+"<span class='findfrom'>"+"from:</span>"+"<span id='findnick'>"+"</span></div>"+"<div class='findposition2'>"+"<span class='findfrom'>"+"to:</span>"+"<span id='find2nick'>"+"</span></div>";
                             li.innerHTML=txt;
                             findul.insertBefore(li,findul.childNodes[0]);
-                }
+                    }
 
-                function find123(){
+                    function find123(){
                     var GameScore = Bmob.Object.extend("Person");
                     var query = new Bmob.Query(GameScore);
                     var b=0;
                     var find=document.getElementById('find').value;
                     if($.trim(find)==""){
-                        alert("对方昵称不能为空！");
+                        alert("电话不能为空！");
                         return;
-                    }
+                        }
                     // 查询所有数据
                     query.find({
                         success: function(results) {
@@ -150,52 +150,152 @@
                               }
                         });
                     hiddendiv();
-                }
+                     }
                 </script>
-                <input type="button" class="button button3 button_inline" value="最新表白" onclick="">
-                <input type="button" class="button button4 button_inline" value="最热表白" onclick="">
+                <input type="button" class="button button3 button_inline" value="最新表白" onclick="newbiaobai()">
+                <script type="text/javascript">
+                var qq=0;
+                    function newbiaobai(){
+                        qq=0;
+                         var GameScore = Bmob.Object.extend("Person");
+                        var query = new Bmob.Query(GameScore);
+                        // 查询所有数据
+                        query.descending("number1");
+                        query.find({
+                          success: function(results) {
+                            for (var i = 0; i < results.length; i++) {
+                              var object = results[i];
+                              var spi=document.getElementById('sp'+(i+1));
+                              var obj=document.getElementById('bb'+(i+1));
+                              spi.innerHTML=object.get('Zan');
+                              obj.innerHTML=object.get('textarea');
+                            }
+                          },
+                          error: function(error) {
+                          }
+                        });
+
+                    }
+
+                    function hotbiaobai(){
+                        qq=1;
+                         var GameScore = Bmob.Object.extend("Person");
+                        var query = new Bmob.Query(GameScore);
+                        // 查询所有数据
+                        query.descending("Zan");
+                        query.find({
+                          success: function(results) {
+                            for (var i = 0; i < results.length; i++) {
+                              var object = results[i];
+                              var spi=document.getElementById('sp'+(i+1));
+                              var obj=document.getElementById('bb'+(i+1));
+                              spi.innerHTML=object.get('Zan');
+                              obj.innerHTML=object.get('textarea');
+                            }
+                          },
+                          error: function(error) {
+                          }
+                        });
+                    }
+                </script>
+                <input type="button" class="button button4 button_inline" value="最热表白" onclick="hotbiaobai()">
                 <div class="clear"></div>
                 <ul type="none" class="mes_ul" id="s">
                     <li class="mes_li mes_li1">
                         <div class="tri"></div><span class="tri_number" name="trinumber">1</span>
-                        <span class="mes_text">你说你不相信天长地久<br>我想我也不能为你证明<br>于我，在爱上你的那刻，时间就已经停止了</span>
+                        <span class="mes_text" id="bb1">你说你不相信天长地久<br>我想我也不能为你证明<br>于我，在爱上你的那刻，时间就已经停止了</span>
                         <!-- 这里的桃心点赞还有问题 -->
-                        <a class="agree" href="javascript:;" onclick="changeimg();pulse()"  id="a1"><img src="image/heart1.gif" id="z_heart"><span id="sp1">200</span></a>
+                        <a class="agree" href="javascript:;" onclick="changeimg(img1,1);pulse(sp1,1)"  id="a1"><img src="image/heart1.gif" id="img1"><span id="sp1">0</span></a>
                     </li>
                     <li class="mes_li mes_li2">
                         <div class="tri"></div><span class="tri_number">2</span>
                          <span class="mes_text" id="bb2">（表白二）</span>
-                        <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" ><span>200</span></a>
+                        <a class="agree" href="javascript:;" onclick="changeimg(img2,2);pulse(sp2,2)"><img src="image/heart1.gif" id="img2"><span id="sp2">0</span></a>
                     </li>
                     <li class="mes_li mes_li3">
                         <div class="tri"></div><span class="tri_number">3</span>
-                         <span class="mes_text">（表白三）</span>
-                        <a class="agree" href="javascript:;" onclick="changeimg()"><img src="image/heart1.gif" ><span>200</span></a>
+                         <span class="mes_text" id="bb3">123<br>123</span>
+                        <a class="agree" href="javascript:;" onclick="changeimg(img3,3);pulse(sp3,3)"><img src="image/heart1.gif" id="img3"><span id="sp3">0</span></a>
                     </li>
                     <script type="text/javascript">
-                        function changeimg(){
-                            var img1=document.getElementById('z_heart');
-                            img1.src="image/heart.gif";
-                        }
-                        function pulse(){
-                            var sp1=document.getElementById('sp1');
-                            sp1.innerHTML=parseInt(sp1.innerHTML)+1;
-                            sendMsg2();
+                        function changeimg(imgi,i){
+                            var imgi=document.getElementById('img'+i);
+                            imgi.src="image/heart.gif";
                         }
 
+                        var zan123=0;
+                     function pulse(spi,i){
+                            if(zan123>4){
+                                alert('只能赞5次哦！');
+                            }
+                           if (zan123<=4) {
+                               var spi=document.getElementById('sp'+i);
+                                spi.innerHTML=parseInt(spi.innerHTML)+1;
+                                var GameScore = Bmob.Object.extend("Person");
+                                var query = new Bmob.Query(GameScore);
+                                // 查询所有数据
+                                if (qq==0) {query.descending("number1");};
+                                if (qq==1) {query.descending("Zan");};
+                                query.find({
+                                  success: function(results) {
+                                    // 循环处理查询到的数据
+                                      var object = results[i-1];
+                                      var objid=object.id;
+                                      /*alert(object.get('number1'));
+                                      alert(objid);
+                                      alert(spi.id);*/
+                                        query.get(objid, {
+                                            success: function(gameScore) {
+                                              // 回调中可以取得这个 GameScore 对象的一个实例，然后就可以修改它了
+                                              gameScore.set('Zan', parseInt(spi.innerHTML));
+                                              gameScore.save();
+                                              // The object was retrieved successfully.
+                                            },
+                                            error: function(object, error) {
+
+                                            }
+                                        });
+                                  
+                              }
+                                });                          
+                                zan123=zan123+1;
+                            }
+
+                        }
                     </script>
                     <li class="mes_li mes_li4" id="li1"><input type="button" value="查看更多" onclick="newli()"></li>
                     <script type="text/javascript">
-                        function newli(){
-                            var s=document.getElementById('s');
-                            var li1=document.getElementById('li1');
-                            var li= document.createElement("li");
-                            li.setAttribute("class", "mes_li");
-                            var txt="<div class='tri'>"+"</div>"+"<span class='tri_number'>"+'x'+"</span>"+
-                         "<span class='mes_text'>"+"（表白三）"+"</span>"+
-                       " <a class='agree' href='javascript:;'' onclick='changeimg()'>"+"<img src='image/heart1.gif' >"+"<span>200</span></a>";
-                            li.innerHTML=txt;
-                            s.insertBefore(li,s.childNodes[6]);
+                        var p=3;
+                      function newli(){
+                            var GameScore = Bmob.Object.extend("Person");
+                            var query = new Bmob.Query(GameScore);
+                            // 查询所有数据
+                            query.find({
+                              success: function(results) {
+                                // 循环处理查询到的数据
+                               if(p<=results.length){
+                                    for (var i = 0; i <3; i++) {
+                                        var s=document.getElementById('s');
+                                        var li1=document.getElementById('li1');
+                                        var li= document.createElement("li");
+                                        li.setAttribute("class", "mes_li");
+                                        var txt="<div class='tri'>"+"</div>"+"<span class='tri_number'>"+(p+1)+"</span>"+"<span class='mes_text'"+"id='bb"+(p+1)+"'"+""+">"+"已无更多表白"+"</span>"+" <a class='agree' href='javascript:;'' onclick='changeimg(img"+(p+1)+","+(p+1)+");pulse(sp"+(p+1)+","+(p+1)+")'>"+"<img src='image/heart1.gif' "+"id='img"+(p+1)+"'>"+"<span id='sp"+(p+1)+"'>0</span></a>";
+                                        li.innerHTML=txt;
+                                        s.insertBefore(li,s.childNodes[p+4]);
+
+                                        if(qq==0){
+                                            newbiaobai()
+                                        }
+                                        if (qq==1) {
+                                            hotbiaobai()
+                                        };
+                                        p=p+1;
+                                    }
+                                }
+                            },
+                              error: function(error) {
+                              }
+                            });
                         }
                     </script>
                 </ul>
@@ -203,37 +303,6 @@
         </div>
     </div>
      <script type="text/javascript">
-         function sendMsg(){
-                var pern= $("#per_n").text();
-                var love= $("#love_n").text();
-                var dorn= $("#dor_n").text();
-                var qs= $("#qs_n").text();
-                var Index= Bmob.Object.extend("Index");
-                var index = new Index();
-                index.set("pern", $("#per_n").text());
-                index.set("love", $("#love_n").text());
-                index.set("dorn", $("#dor_n").text());
-                index.set("qs", $("#qs_n").text());
-                index.save(null, {
-                    success: function(object) {     
-                    },
-                    error: function(model, error) {            
-                        }
-                    });     
-                }
-
-            function    sendMsg2(){
-                var zan1=  $("#sp1").text();
-                var Zan= Bmob.Object.extend("Zan");
-                var zan = new Zan();
-                zan.set("zan1", $("#sp1").text());
-                zan.save(null, {
-                    success: function(object) {     
-                    },
-                    error: function(model, error) {            
-                        }
-                    });   
-            }
                 //服务器
                 BmobSocketIo.initialize("94a9ab4b917a187f0033aeef5fabb005");
                 Bmob.initialize("94a9ab4b917a187f0033aeef5fabb005", "20d029e92630c3e938235f6870475de2");
@@ -247,31 +316,6 @@
 
                   //监听服务器返回的更新表的数据
                BmobSocketIo.onUpdateTable = function(tablename,data) {}
-
-                var GameScore = Bmob.Object.extend("Person");
-                var query = new Bmob.Query(GameScore);
-                query.get("f0b0f8669f", {
-                  success: function(object) {
-                    // The object was retrieved successfully.
-                    var p = document.getElementById('bb2');
-                    p.innerHTML=object.get("textarea");
-                    var tn = document.getElementsByName('trinumber');
-                  },
-                  error: function(object, error) {
-                    alert("query object fail");
-                  }
-                });
-                query.count({
-                  success: function(number) {
-                    // There are number instances of MyClass.
-                    /*alert(number+'yes');*/
-                  },
-
-                  error: function(error) {
-                    // error is an instance of Bmob.Error.
-                  }
-                });
-
 
                 /*有多少人*/
                 var GameScore = Bmob.Object.extend("Person");
@@ -288,29 +332,28 @@
                 // 查询所有数据
                 query.find({
                   success: function(results) {
-
-                function number123(obj){
-                // 循环处理查询到的数据
-                        c=0;
-                        a=-1;
-                        for (var i = 0; i < results.length; i++) {
-                          var object = results[i];
-                          var nick=object.get(obj);
-                            nick123[i]=nick;
-                        }
-                        for (var j = 0; j<results.length; j++) { 
-                            var object = results[j];
-                            var nick=object.get(obj);
-                            for (var i = j; i < results.length; i++) {
-                               if (nick123[i]==nick) {
-                                    a=a+1;
-                                };                           
-                            };
-                            if(a!=0||nick==''){
-                                    c=c+1;
-                            };   
-                            a=-1;
-                        };
+                     function number123(obj){
+                        // 循环处理查询到的数据
+                                c=0;
+                                a=-1;
+                                for (var i = 0; i < results.length; i++) {
+                                  var object = results[i];
+                                  var nick=object.get(obj);
+                                    nick123[i]=nick;
+                                }
+                                for (var j = 0; j<results.length; j++) { 
+                                    var object = results[j];
+                                    var nick=object.get(obj);
+                                    for (var i = j; i < results.length; i++) {
+                                       if (nick123[i]==nick) {
+                                            a=a+1;
+                                        };                           
+                                    };
+                                    if(a!=0||nick==''){
+                                            c=c+1;
+                                    };   
+                                    a=-1;
+                                };
 
                 }
                     love.innerHTML= results.length;
@@ -327,8 +370,26 @@
                     alert("查询失败: " + error.code + " " + error.message);
                   }
                 });
-
-                sendMsg();
+                function zancount(){
+                        var GameScore = Bmob.Object.extend("Person");
+                        var query = new Bmob.Query(GameScore);
+                        // 查询所有数据
+                        query.descending("number1");
+                        query.find({
+                          success: function(results) {
+                            for (var i = 0; i < results.length; i++) {
+                              var object = results[i];
+                              var spi=document.getElementById('sp'+(i+1));
+                              var obj=document.getElementById('bb'+(i+1));
+                              spi.innerHTML=object.get('Zan');
+                              obj.innerHTML=object.get('textarea');
+                            }
+                          },
+                          error: function(error) {
+                          }
+                        });
+                }
+                zancount();
       </script>
 </body>
 </html>

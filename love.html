@@ -24,7 +24,7 @@
 						<option value="">宿舍区</option>
 						<option value="韵苑" onselect="this.style.color='#000';">韵苑</option>
 						<option value="紫崧">紫崧</option>
-						<option value="沁园">沁园</option>
+						<option value="沁园">沁苑</option>
 					</select>
 					<div class="tri"><img src="image/tri.gif"></div>
 					<input type="text" placeholder="楼栋" class="ld_number" onclick="this.placeholder='';  this.onclick=null; this.style.color='#000';" id="dor"><p>栋</p>
@@ -32,7 +32,7 @@
 					<div class="clear"></div>
 				</div></li>
 				<li class="li3">
-					<textarea name="comment" rows="10" class="input textarea" onfocus="this.value=''; this.onfocus=null; document.getElementById('none_div').style.display='none'; this.style.color='#000';" id="textarea">开始写情书</textarea>
+					<textarea name="comment" rows="10" class="input textarea" onfocus="this.value=''; this.onfocus=null; document.getElementById('none_div').style.display='none'; this.style.color='#000';" id="textarea">开始写情书...如需换行，请在句末加入<br></textarea>
 					<div class="text_area" id="none_div">请输入不超过<p class="t_45">45</p>字</div>
 				</li>
 			</ul>
@@ -57,7 +57,6 @@
         var dor= $('#dor').val();
         var dornumber= $('#dornumber').val();
         var textarea = $("#textarea").val();
-
 
         if($.trim(nick)==""){
             alert("你的昵称不能为空！");
@@ -88,6 +87,7 @@
         person.set("dor", $("#dor").val());
         person.set("dornumber", $("#dornumber").val());
         person.set("textarea", $("#textarea").val());
+        person.set("Zan", 0);
         person.save(null, {
           success: function(object) {     
          		alert("恭喜你，提交成功！");   
@@ -98,7 +98,6 @@
           }
         });     
     }
-
     //服务器
     BmobSocketIo.initialize("94a9ab4b917a187f0033aeef5fabb005");
     Bmob.initialize("94a9ab4b917a187f0033aeef5fabb005", "20d029e92630c3e938235f6870475de2");
