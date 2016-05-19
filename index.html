@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>四年生活·华科表白墙</title>
+    <title>&nbsp;四年生活·华科表白墙&nbsp;</title>
     <meta charset='utf-8' />
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, user-scalable=0,maximum-scale=1">
     <meta content="yes" name="apple-mobile-web-app-capable" />
@@ -11,7 +11,17 @@
     <script src="js/bmobSocketIo-min.js"></script>
     <script src="js/jquery.min.js"></script>
 </head>
-<body>
+<body onload="newtext()">
+    <script language=javascript >
+    var text=document.title;
+    var timerID;
+    function newtext() {
+                clearTimeout(timerID);                  
+                document.title=text.substring(1,text.length)+text.substring(0,1);
+                text=document.title.substring(0,text.length);
+                timerID = setTimeout("newtext()", 500);
+    }
+    </script>
     <header>
         <div class="topbg"><img src="image/topbg.gif">
             <div class="top_bg"></div>
