@@ -184,6 +184,8 @@
 	border-bottom: #A87EA6 2px solid;
 	width: 100%;
 	position: relative;
+	overflow-y:scroll;
+	overflow-x:hidden;  
 }
 .mes_li4{
 	border-bottom: none;
